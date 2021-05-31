@@ -1,21 +1,25 @@
 #include <iostream>
 using namespace std;
 
-struct node
-{
-	int data;
-	node*next;
-};
-
+template <typename T>
 class LQueue{
+
+protected:
+	class node
+	{
+	public:
+		T data;
+		node*next;
+	};
+
 public:
 	node*front;
 	node*back;
 
 	LQueue(){
 		//Init front and back of Queue
-		front = nullptr;
-		back = nullptr;
+		front = NULL;
+		back = NULL;
 	}
 
 	~LQueue(){
@@ -29,7 +33,7 @@ public:
 		back = NULL;
 	}
 
-	void enqueue(int data){
+	const void enqueue(T data){
 		node*new_node = new node();
 		//Set data and next node
 		new_node->data = data;
@@ -46,8 +50,7 @@ public:
 		}
 	}
 
-
-	bool isEmpty(){
+	const bool empty() const{
 		//Check if front and back are null
 		if (front == NULL && back == NULL){
 			return true;
@@ -57,8 +60,8 @@ public:
 		}
 	}
 
-	int peek(){
-		int x = 0;
+	const T peek() const{
+		T x = 0;
 		//Get the node
 		node*temp = front;
 		//Pop of the data in temp node
@@ -69,10 +72,10 @@ public:
 		return x;
 	}
 
-	int dequeue(){
+	const T dequeue(){
 		node*temp = NULL;
 
-		if (isEmpty()){
+		if (empty()){
 			std::cerr << "Queue is empty" << std::endl;
 			return -1;
 		}
